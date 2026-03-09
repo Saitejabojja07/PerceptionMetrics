@@ -52,48 +52,131 @@
 
 More details about the specific metrics and input/output formats required fow each framework are provided in the [Compatibility](https://jderobot.github.io/PerceptionMetrics/compatibility/) section in our webpage.
 
-
 # Installation
-In the near future, *PerceptionMetrics* is planned to be deployed in PyPI. In the meantime, you can clone our repo and build the package locally using either *venv* or *Poetry*.
 
-### Using venv
-Create your virtual environment:
+*PerceptionMetrics* can be installed in two different ways depending on your needs:
+
+* **Regular users**: Install the package directly from PyPI.
+* **Developers**: Clone the repository and install the development environment using Poetry.
+
+---
+
+## Install from PyPI (Recommended for users)
+
+The latest stable release of *PerceptionMetrics* is available on PyPI.
+
+Install it with:
+
 ```
-python3 -m venv .venv
+pip install perceptionmetrics
 ```
 
-Activate your environment and install as pip package:
+After installation, you can start using the library in your Python environment.
+
+---
+
+## Developer Installation (Using Poetry)
+
+If you want to contribute to the project or modify the source code, clone the repository and install the dependencies using Poetry.
+
+### Clone the repository
+
 ```
-source .venv/bin/activate
-pip install -e .
+git clone https://github.com/JdeRobot/PerceptionMetrics.git
+cd PerceptionMetrics
 ```
 
-### Using Poetry
+### Install Poetry
 
-Install Poetry (if not done before):
+Poetry is used to manage dependencies and development environments.
+
+First install `pipx` (recommended for installing CLI tools):
+
 ```
 python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+```
+
+Then install Poetry:
+
+```
 pipx install poetry
 ```
 
-Install dependencies and activate poetry environment (you can get out of the Poetry shell by running `exit`):
+⚠️ Note: `pipx` should be installed **outside any virtual environment**.
+If you run this command inside a `venv`, you may see:
+
+```
+ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+```
+
+### Install dependencies
+
+Poetry automatically creates and manages a virtual environment for the project.
+
+Install dependencies with:
 ```
 poetry install
-eval $(poetry env activate)
 ```
 
-### Common
-Install your deep learning framework of preference in your environment. We have tested:
-- CUDA Version: `12.6`
-- `torch==2.4.1` and `torchvision==0.19.1`.
-- `torch==2.2.2` and `torchvision==0.17.2`.
-- `tensorflow==2.17.1`
-- `tensorflow==2.16.1`
+Activate the environment:
 
-If you are using LiDAR, Open3D currently requires `torch==2.2*`.
+```
+poetry shell
+```
 
-### Additional environments
-Some LiDAR segmentation models, such as SphereFormer and LSK3DNet, require a dedicated installation workflow. Refer to [additional_envs/INSTRUCTIONS.md](https://github.com/JdeRobot/PerceptionMetrics/blob/master/additional_envs/INSTRUCTIONS.md) for detailed setup instructions.
+You can exit the Poetry environment anytime by running:
+
+```
+exit
+```
+
+---
+
+## Deep Learning Framework Setup
+
+Install the deep learning framework of your choice inside your environment.
+
+The following configurations have been tested:
+
+* CUDA Version: `12.6`
+* `torch==2.4.1` and `torchvision==0.19.1`
+* `torch==2.2.2` and `torchvision==0.17.2`
+* `tensorflow==2.17.1`
+* `tensorflow==2.16.1`
+
+If you are working with LiDAR models, note that **Open3D currently requires**:
+
+```
+torch==2.2*
+```
+
+---
+
+## Running Examples
+
+After installation, you can explore the examples provided in the repository.
+
+If using Poetry:
+
+```
+poetry run python examples/<some_script.py>
+```
+
+or activate the environment:
+
+```
+poetry shell
+python examples/<some_script.py>
+```
+
+---
+
+### Additional Environments
+
+Some LiDAR segmentation models, such as **SphereFormer** and **LSK3DNet**, require additional installation steps.
+
+Refer to [additional_envs/INSTRUCTIONS.md](additional_envs/INSTRUCTIONS.md) for detailed setup instructions.
 
 # Usage
 PerceptionMetrics can be used in three ways: through the **interactive GUI** (detection only), as a **Python library**, or via the **command-line interface** (segmentation and detection).
